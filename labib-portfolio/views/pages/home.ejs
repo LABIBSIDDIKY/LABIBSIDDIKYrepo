@@ -1,3 +1,4 @@
+
 <% layout = false; %>
 <!doctype html>
 <html lang="en">
@@ -72,12 +73,12 @@
       </div>
 
       <div class="hero-content">
-
-        <img
-          class="profile-picture reveal"
-          src="/images/profile.jpg"
-          alt="Portrait of Labib"
-        />
+           
+<img
+  class="profile-picture reveal"
+  src="/images/profile.jpg"
+  alt="Portrait of Labib"
+/>
 
         <p class="eyebrow reveal">
           HELLO, I'M <%= profile.shortName.toUpperCase() %>
@@ -214,12 +215,10 @@
 
   <%- include("../partials/footer", { profile }) %>
 
-  <script type="application/json" id="skills-data"><%- JSON.stringify(skills).replace(/</g, "\\u003c") %></script>
-
   <script type="module" src="/js/main.js"></script>
   <script type="module" src="/js/scroll.js"></script>
   <script type="module" src="/js/circuit.js"></script>
   <script type="module" src="/js/clock.js"></script>
-  <script type="module" src="/js/mindmap.js?v=4"></script>
+  <script type="module" src="/js/mindmap.js"></script>
 </body>
 </html>
