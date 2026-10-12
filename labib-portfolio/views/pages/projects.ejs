@@ -1,28 +1,105 @@
-<% layout = false; %>
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0b0d0b"><title><%= title %></title><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/animations.css"></head>
-<body data-page="projects"><a class="skip-link" href="#main">Skip to content</a><div class="site-noise"></div><%- include("../partials/navbar", { page, profile }) %><main id="main">
-<section class="page-hero section-shell"><p class="eyebrow reveal">PROJECTS / FIELD NOTES</p><h1 class="page-title reveal">Things I've<br><span>made & learned.</span></h1><p class="page-lead reveal">A growing collection of experiments, labs, and projects. Each entry should eventually include the problem, process, and outcome.</p></section>
-<section class="section-shell section-space"><div class="project-grid project-grid-full"><% projects.forEach(project => { %><article class="project-card reveal"><div class="project-art" data-thumb="<%= project.thumbnail || 'circuit' %>">
+<% if (typeof layout !== 'undefined') { layout = false; } %>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0d0b">
+  <title><%= typeof title !== 'undefined' ? title : 'Projects' %></title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
+</head>
+<body data-page="projects">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="site-noise"></div>
 
-<svg class="art-anim" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-  <% if (project.thumbnail === "pulse") { %>
-    <path class="trace" pathLength="100" d="M0 60 H55 L65 30 L80 90 L92 45 L100 60 H200" />
-    <path class="trace ghost" pathLength="100" d="M0 60 H200" />
-    <circle class="node" cx="65" cy="30" r="3.5" />
-    <circle class="node n2" cx="80" cy="90" r="3.5" />
-  <% } else if (project.thumbnail === "match") { %>
-    <rect class="box b1" x="30" y="40" width="40" height="40" rx="6" />
-    <rect class="box b2" x="130" y="40" width="40" height="40" rx="6" />
-    <path class="trace link" pathLength="100" d="M74 60 H126" />
-    <circle class="node" cx="100" cy="60" r="4" />
-  <% } else { %>
-    <path class="trace" pathLength="100" d="M10 30 H70 L90 60 H190" />
-    <path class="trace t2" pathLength="100" d="M10 90 H60 L80 60 H120 L140 30 H190" />
-    <circle class="node" cx="70" cy="30" r="4" />
-    <circle class="node n2" cx="80" cy="60" r="4" />
-    <circle class="node n3" cx="140" cy="30" r="4" />
-  <% } %>
-</svg>
+  <%- include("../partials/navbar", { page: typeof page !== 'undefined' ? page : 'projects', profile: typeof profile !== 'undefined' ? profile : {} }) %>
 
-<span class="project-number"><%= project.number %></span><div class="art-grid"></div><span class="art-orbit"></span><span class="art-label"><%= project.category.toUpperCase() %></span></div><div class="project-meta"><div><p class="eyebrow"><%= project.status %></p><h3><%= project.name %></h3></div><a class="project-arrow" href="<%= project.href %>" <% if (project.href && project.href.startsWith('http')) { %>target="_blank" rel="noopener noreferrer"<% } %> aria-label="Open <%= project.name %>">↗</a></div><p class="project-description"><%= project.description %></p><div class="tag-list"><% project.stack.forEach(tag => { %><span><%= tag %></span><% }) %></div></article><% }) %></div></section>
-</main><%- include("../partials/footer", { profile }) %><script type="module" src="/js/main.js"></script><script type="module" src="/js/scroll.js"></script><script type="module" src="/js/circuit.js"></script><script type="module" src="/js/clock.js"></script></body></html>
+  <main id="main">
+    <section class="page-hero section-shell">
+      <p class="eyebrow reveal">PROJECTS / FIELD NOTES</p>
+      <h1 class="page-title reveal">Things I've<br><span>made &amp; learned.</span></h1>
+      <p class="page-lead reveal">A growing collection of experiments, labs, and projects. Each entry should eventually include the problem, process, and outcome.</p>
+    </section>
+
+    <section class="section-shell section-space">
+      <div class="project-grid project-grid-full">
+        <% (typeof projects !== 'undefined' ? projects : []).forEach(project => {
+             const thumb = project.thumbnail || 'circuit';
+             const category = (project.category || '').toString().toUpperCase();
+             const stack = Array.isArray(project.stack) ? project.stack : [];
+             const isExternal = project.href && /^https?:/i.test(project.href);
+        %>
+        <article class="project-card reveal">
+          <div class="project-art" data-thumb="<%= thumb %>">
+
+            <svg class="art-anim" viewBox="0 0 200 120" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
+              <% if (thumb === "pulse") { %>
+                <path class="trace" pathLength="100" d="M0 60 H55 L65 30 L80 90 L92 45 L100 60 H200" />
+                <path class="trace ghost" pathLength="100" d="M0 60 H200" />
+                <circle class="node" cx="65" cy="30" r="3.5" />
+                <circle class="node n2" cx="80" cy="90" r="3.5" />
+              <% } else if (thumb === "match") { %>
+                <rect class="box b1" x="30" y="40" width="40" height="40" rx="6" />
+                <rect class="box b2" x="130" y="40" width="40" height="40" rx="6" />
+                <path class="trace link" pathLength="100" d="M74 60 H126" />
+                <circle class="node" cx="100" cy="60" r="4" />
+              <% } else { %>
+                <path class="trace" pathLength="100" d="M10 30 H70 L90 60 H190" />
+                <path class="trace t2" pathLength="100" d="M10 90 H60 L80 60 H120 L140 30 H190" />
+                <circle class="node" cx="70" cy="30" r="4" />
+                <circle class="node n2" cx="80" cy="60" r="4" />
+                <circle class="node n3" cx="140" cy="30" r="4" />
+              <% } %>
+            </svg>
+
+            <span class="project-number"><%= project.number || '' %></span>
+            <div class="art-grid"></div>
+            <span class="art-orbit"></span>
+            <span class="art-label"><%= category %></span>
+          </div>
+
+          <div class="project-meta">
+            <div>
+              <p class="eyebrow"><%= project.status || '' %></p>
+              <h3><%= project.name || 'Untitled' %></h3>
+            </div>
+            <a class="project-arrow"
+               href="<%= project.href || '#' %>"
+               <% if (isExternal) { %>target="_blank" rel="noopener noreferrer"<% } %>
+               aria-label="Open <%= project.name || 'project' %>">↗</a>
+          </div>
+
+          <p class="project-description"><%= project.description || '' %></p>
+
+          <div class="tag-list">
+            <% stack.forEach(tag => { %><span><%= tag %></span><% }) %>
+          </div>
+        </article>
+        <% }) %>
+      </div>
+    </section>
+  </main>
+
+  <%- include("../partials/footer", { profile: typeof profile !== 'undefined' ? profile : {} }) %>
+
+  <script type="module" src="/js/main.js"></script>
+  <script type="module" src="/js/scroll.js"></script>
+  <script type="module" src="/js/circuit.js"></script>
+  <script type="module" src="/js/clock.js"></script>
+
+  <!-- Safety net: if scroll.js fails, reveal content after 1.5s so the page is never blank -->
+  <script>
+    setTimeout(function () {
+      document.querySelectorAll('.reveal').forEach(function (el) {
+        if (getComputedStyle(el).opacity === '0') {
+          el.style.opacity = '1';
+          el.style.transform = 'none';
+        }
+      });
+    }, 1500);
+  </script>
+</body>
+</html>
