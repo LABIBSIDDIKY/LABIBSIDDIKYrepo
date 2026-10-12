@@ -1,0 +1,93 @@
+/* change: make the map larger so sub-branches have room */
+.mindmap-wrap { max-width: 900px; }
+.mindmap-large { max-width: 1000px; }
+
+/* make main nodes a bit more compact */
+.mind-node { min-width: 84px; padding: 8px 12px; }
+
+/* new: sub branches */
+.sub-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 6px 12px;
+  font: inherit;
+  font-size: .72rem;
+  font-weight: 600;
+  color: inherit;
+  white-space: nowrap;
+  background: #0b0d0b;
+  border: 1px solid color-mix(in srgb, var(--node-color) 35%, transparent);
+  border-radius: 999px;
+  cursor: pointer;
+  opacity: .8;
+  z-index: 3;
+  transition: border-color .25s, box-shadow .25s, opacity .25s, transform .25s;
+}
+.sub-node::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-right: 6px;
+  border-radius: 50%;
+  background: var(--node-color);
+}
+.sub-node:hover,
+.sub-node.is-lit {
+  opacity: 1;
+  border-color: var(--node-color);
+}
+.sub-node.is-active {
+  opacity: 1;
+  border-color: var(--node-color);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--node-color) 40%, transparent);
+  transform: translate(-50%, -50%) scale(1.08);
+}
+.sub-node:focus-visible { outline: 2px solid var(--node-color); outline-offset: 3px; }
+
+.mindmap-lines path.is-lit { stroke-width: 1.8; }
+.detail-level { display: block; font-size: .75rem; opacity: .6; font-style: normal; margin: .5rem 0; }
+
+@media (max-width: 600px) {
+  .mindmap-wrap { aspect-ratio: 5 / 6; }
+  .mind-node { min-width: 64px; padding: 6px 8px; }
+  .mind-node small { display: none; }
+  .node-label { font-size: .65rem; }
+  .sub-node { padding: 4px 8px; font-size: .58rem; }
+  .sub-node::before { display: none; }
+}
+/* bigger container, nothing clipped */
+.mindmap-wrap {
+  width: 100%;
+  max-width: 1100px;
+  aspect-ratio: 4 / 3;
+  overflow: visible;
+}
+.mindmap-large {
+  max-width: 1200px;
+  aspect-ratio: 5 / 4;
+}
+.mindmap-lines svg {
+  overflow: visible;
+}
+.mindmap-lines path {
+  animation: none;          /* dashes animate fine, but this avoids restyling per frame */
+  vector-effect: none;
+}
+.mindmap-center { z-index: 2; }
+.mind-node, .sub-node { z-index: 3; }
+
+.sub-node {
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 700px) {
+  .mindmap-wrap,
+  .mindmap-large { aspect-ratio: 3 / 4; }
+  .mind-node { min-width: 62px; padding: 6px 8px; }
+  .mind-node small { display: none; }
+  .node-label { font-size: .65rem; }
+  .sub-node { padding: 4px 8px; font-size: .58rem; }
+  .sub-node::before { display: none; }
+}

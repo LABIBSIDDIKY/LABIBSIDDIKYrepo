@@ -1,0 +1,24 @@
+{
+  "name": "labib-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A fluid, circuit-inspired personal developer portfolio built with Express, EJS, GSAP and Lenis.",
+  "main": "src/app.js",
+  "scripts": {
+    "dev": "nodemon src/app.js",
+    "start": "node src/app.js"
+  },
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.22.3",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.26"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs"
+}

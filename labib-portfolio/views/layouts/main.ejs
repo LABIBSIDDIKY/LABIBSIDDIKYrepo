@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0d0b">
+  <meta name="description" content="Personal portfolio of Saiful Siddiky Labib — development, systems, networking, and cybersecurity.">
+  <title><%= title %></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <% if (page === "skills" || page === "home") { %><link rel="stylesheet" href="/css/mindmap.css"><% } %>
+</head>
+<body data-page="<%= page %>">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="site-noise" aria-hidden="true"></div>
+  <%- include("../partials/navbar", { page, profile }) %>
+  <main id="main">
+    <%- body %>
+  </main>
+  <%- include("../partials/footer", { profile }) %>
+  <script type="module" src="/js/main.js"></script>
+  <script type="module" src="/js/scroll.js"></script>
+  <script type="module" src="/js/circuit.js"></script>
+  <script type="module" src="/js/clock.js"></script>
+  <% if (page === "skills" || page === "home") { %><script type="module" src="/js/mindmap.js"></script><% } %>
+</body>
+</html>

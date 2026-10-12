@@ -1,0 +1,29 @@
+<% layout = false; %>
+<%
+const skills = [
+  { name: "WordPress", summary: "Building and managing websites with themes, plugins, and page builders." },
+  { name: "Presentation", summary: "Turning ideas into clear, well-structured slides that are easy to follow." },
+  { name: "Public speaking", summary: "Delivering talks and ideas to an audience with clarity and confidence." },
+  { name: "Photoshop", summary: "Photo editing, retouching, and graphic design for posters and social media." },
+  { name: "Premiere Pro", summary: "Cutting, arranging, and polishing video into finished edits." },
+  { name: "After Effects", summary: "Adding motion graphics, titles, and visual effects to video." },
+  { name: "Data entry", summary: "Fast, accurate entry and organization of information into spreadsheets and systems." },
+  { name: "Digital marketing", summary: "Promoting brands and content online through social media and digital channels." },
+  { name: "Circuit design", summary: "Designing and testing electronic circuits from schematic to working layout." },
+  { name: "Digital logic design", summary: "Working with logic gates, combinational and sequential circuits, and truth tables." },
+  { name: "Japanese", summary: "Learning the language to communicate across cultures and widen my perspective." },
+  { name: "Spanish", summary: "Learning the language to communicate across cultures and widen my perspective." },
+  { name: "Hindi", summary: "Using the language for everyday communication and connecting with more people." },
+  { name: "Hardware and software troubleshooting", summary: "Diagnosing and fixing computer problems, from faulty components to software errors." },
+  { name: "Remote IT support", summary: "Helping people solve technical issues from a distance using remote tools." }
+];
+const roles = ["CSE Student", "Software Developer", "Web Developer", "Beginner Cyber Security Consultant"];
+%>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0b0d0b"><title><%= title %></title><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/animations.css"></head>
+<body data-page="about"><a class="skip-link" href="#main">Skip to content</a><div class="site-noise"></div><%- include("../partials/navbar", { page, profile }) %><main id="main">
+<section class="page-hero section-shell"><p class="eyebrow reveal">ABOUT / CONTEXT</p><h1 class="page-title reveal">A curious mind.<br><span>A growing toolkit.</span></h1><p class="page-lead reveal"><%= profile.headline %></p></section>
+<section class="section-shell section-space"><div class="section-heading"><div><p class="eyebrow">WHO I AM</p><h2>Saiful Siddiky <span>Labib</span></h2></div></div><div class="tag-list"><% roles.forEach(role => { %><span><%= role %></span><% }) %></div></section>
+<section class="section-shell content-grid section-space"><div><p class="eyebrow">THE SHORT VERSION</p><h2>Learning is a <span>practice.</span></h2></div><div class="prose"><% profile.about.forEach(paragraph => { %><p><%= paragraph %></p><% }) %><p>My focus is on building a solid foundation, documenting what I learn, and turning practice into useful projects.</p></div></section>
+<section class="section-shell section-space"><div class="section-heading"><div><p class="eyebrow">EDUCATION</p><h2>Where I'm <span>learning.</span></h2></div></div><div class="timeline"><% profile.education.forEach(item => { %><article class="timeline-item"><span class="timeline-dot"></span><div><p class="eyebrow"><%= item.period %></p><h3><%= item.qualification %></h3><h4><%= item.institution %></h4><p><%= item.detail %></p></div></article><% }) %></div></section>
+<section class="section-shell section-space"><div class="section-heading"><div><p class="eyebrow">SKILLS</p><h2>What I'm <span>exploring.</span></h2></div></div><div class="interest-grid"><% skills.forEach((skill, i) => { %><div class="interest-card skill-card reveal"><span class="mono"><%= String(i + 1).padStart(2, "0") %></span><h3><%= skill.name %></h3><p class="skill-summary"><%= skill.summary %></p></div><% }) %></div></section>
+</main><%- include("../partials/footer", { profile }) %><script type="module" src="/js/main.js"></script><script type="module" src="/js/scroll.js"></script><script type="module" src="/js/circuit.js"></script><script type="module" src="/js/clock.js"></script></body></html>

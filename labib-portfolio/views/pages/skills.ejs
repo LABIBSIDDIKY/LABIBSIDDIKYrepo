@@ -1,0 +1,108 @@
+<% layout = false; %>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0d0b">
+  <title><%= title %></title>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/mindmap.css">
+  <link rel="stylesheet" href="/css/skills-video.css">
+</head>
+
+<body data-page="skills">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="site-noise" aria-hidden="true"></div>
+
+  <%- include("../partials/navbar", { page, profile }) %>
+
+  <main id="main">
+
+    <section class="page-hero section-shell">
+      <p class="eyebrow reveal">SKILLS / EXPLORER</p>
+      <h1 class="page-title reveal">
+        A map of what<br>
+        <span>I'm building.</span>
+      </h1>
+      <p class="page-lead reveal">
+        Select any node to explore a skill area. This map is designed
+        to evolve as real projects and evidence are added.
+      </p>
+    </section>
+
+    <section class="skills-video-section">
+      <video
+        class="skills-background-video"
+        autoplay muted loop playsinline
+        preload="metadata"
+        aria-hidden="true"
+        tabindex="-1"
+      >
+        <source src="/videos/skills-circuit.mp4" type="video/mp4">
+      </video>
+
+      <div class="skills-video-overlay" aria-hidden="true"></div>
+
+      <div class="skills-video-content section-shell section-space">
+
+        <div class="skills-section-label">
+          <p class="eyebrow">INTERACTIVE KNOWLEDGE NETWORK</p>
+          <span class="mono">SYSTEM / SKILLS-001</span>
+        </div>
+
+        <div class="mindmap-wrap mindmap-large">
+          <div class="mindmap-lines" aria-hidden="true"></div>
+
+          <div class="mindmap-center">
+            <span class="center-ring"></span>
+            <span>LABIB</span>
+            <small>SKILLS / INTERESTS</small>
+          </div>
+
+          <div class="mindmap-nodes">
+            <% skills.forEach(skill => { %>
+              <%- include("../partials/skill-node", { skill }) %>
+            <% }) %>
+          </div>
+        </div>
+
+        <div
+          class="skill-detail skill-detail-large"
+          data-skill-detail
+          aria-live="polite"
+        >
+          <span class="detail-kicker">SELECT A NODE</span>
+          <h3>Explore the branches.</h3>
+          <p>Choose a node above to see its focus areas and practical notes.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <section class="section-shell section-space">
+      <p class="eyebrow">A NOTE ON PROFICIENCY</p>
+      <p class="prose narrow">
+        The labels here are intentionally honest placeholders.
+        Replace them with specific proficiency levels only when you
+        can support them with completed work, projects, labs, or other evidence.
+      </p>
+    </section>
+
+  </main>
+
+  <%- include("../partials/footer", { profile }) %>
+
+  <script type="application/json" id="skills-data"><%- JSON.stringify(skills).replace(/</g, "\\u003c") %></script>
+
+  <script type="module" src="/js/main.js"></script>
+  <script type="module" src="/js/scroll.js"></script>
+  <script type="module" src="/js/circuit.js"></script>
+  <script type="module" src="/js/clock.js"></script>
+  <script type="module" src="/js/mindmap.js?v=4"></script>
+</body>
+</html>

@@ -1,0 +1,127 @@
+
+/* Skills section cinematic video background */
+
+.skills-video-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #0b0d0b;
+}
+
+/* Full-section video background */
+.skills-background-video {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+
+  width: 100%;
+  height: 100%;
+  display: block;
+
+  object-fit: cover;
+  object-position: center;
+
+  opacity: 0.42;
+  pointer-events: none;
+}
+
+/* Keep the background atmospheric rather than distracting */
+.skills-video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(11, 13, 11, 0.82) 0%,
+      rgba(11, 13, 11, 0.38) 30%,
+      rgba(11, 13, 11, 0.55) 70%,
+      rgba(11, 13, 11, 0.96) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(11, 13, 11, 0.72),
+      rgba(11, 13, 11, 0.22),
+      rgba(11, 13, 11, 0.72)
+    );
+}
+
+/* Content remains above the video */
+.skills-video-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Small technical label above the mind map */
+.skills-section-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.skills-section-label .eyebrow {
+  margin-bottom: 0;
+}
+
+.skills-section-label .mono {
+  color: var(--muted);
+  font-size: 0.65rem;
+}
+
+/* Transparent mind map lets some background motion show through */
+.skills-video-section .mindmap-wrap {
+  background: rgba(10, 15, 10, 0.48);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  border-color: rgba(199, 243, 107, 0.22);
+}
+
+/* Keep the skill detail panel readable */
+.skills-video-section .skill-detail {
+  background: rgba(12, 16, 12, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-color: rgba(199, 243, 107, 0.18);
+}
+
+/* Smaller screens */
+@media (max-width: 800px) {
+  .skills-background-video {
+    opacity: 0.30;
+    object-position: center;
+  }
+
+  .skills-video-overlay {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(11, 13, 11, 0.78),
+        rgba(11, 13, 11, 0.58) 45%,
+        rgba(11, 13, 11, 0.96)
+      );
+  }
+
+  .skills-section-label .mono {
+    display: none;
+  }
+}
+
+/* Reduced motion and battery-friendly fallback */
+@media (prefers-reduced-motion: reduce) {
+  .skills-background-video {
+    display: none;
+  }
+
+  .skills-video-overlay {
+    background: #0b0d0b;
+  }
+
+  .skills-video-section .mindmap-wrap {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+}

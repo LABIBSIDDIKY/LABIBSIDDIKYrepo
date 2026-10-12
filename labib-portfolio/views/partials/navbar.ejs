@@ -1,0 +1,16 @@
+<header class="site-header">
+  <a class="brand" href="/" aria-label="Go to homepage">
+    <span class="brand-mark">L<span>.</span></span>
+    <span class="brand-name">LABIB<span class="brand-dot">/</span></span>
+  </a>
+  <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav">
+    <span></span><span></span><span class="sr-only">Toggle navigation</span>
+  </button>
+  <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
+    <a class="<%= page === 'about' ? 'is-active' : '' %>" href="/about">About</a>
+    <a class="<%= page === 'skills' ? 'is-active' : '' %>" href="/skills">Skills</a>
+    <a class="<%= page === 'projects' ? 'is-active' : '' %>" href="/projects">Projects</a>
+    <a class="<%= page === 'contact' ? 'is-active' : '' %>" href="/contact">Contact</a>
+  </nav>
+  <div class="header-status"><span class="status-dot"></span> Open to learning</div>
+</header>
