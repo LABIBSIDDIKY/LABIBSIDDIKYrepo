@@ -27,13 +27,79 @@ const EXCLUDE = '[disabled], [aria-disabled="true"], .skip-link, [data-circuit="
 const NS = 'http://www.w3.org/2000/svg';
 const PAD = 14; // room around the element for branch traces (px)
 
-// Load the stylesheet automatically (expects /js/ and /css/ side by side)
-if (!document.querySelector('link[data-circuit-hover]')) {
-  const link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.href = new URL('../css/circuit-hover.css', import.meta.url).href;
-  link.dataset.circuitHover = '';
-  document.head.appendChild(link);
+// Styles are embedded here, so no separate CSS file is needed.
+const CSS = `
+:root {
+  --cx-color: #00e5ff;
+  --cx-glow: rgba(0, 229, 255, 0.55);
+  --cx-draw-time: 0.45s;
+  --cx-pulse-time: 1.4s;
+}
+.cx-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 9999;
+  overflow: visible;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.18s ease;
+  filter: drop-shadow(0 0 3px var(--cx-glow)) drop-shadow(0 0 9px var(--cx-glow));
+}
+.cx-overlay.is-on { opacity: 1; }
+.cx-overlay * {
+  fill: none;
+  stroke: var(--cx-color);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.cx-overlay .cx-base {
+  stroke-width: 1.2;
+  stroke-opacity: 0.6;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: cx-draw var(--cx-draw-time) ease-out forwards;
+}
+.cx-overlay .cx-pulse {
+  stroke-width: 2.2;
+  stroke-dasharray: 7 43;
+  stroke-dashoffset: 0;
+  opacity: 0;
+  animation:
+    cx-show 0.01s calc(var(--cx-draw-time) * 0.75) forwards,
+    cx-run var(--cx-pulse-time) linear calc(var(--cx-draw-time) * 0.75) infinite;
+}
+.cx-overlay .cx-branch {
+  stroke-width: 1.1;
+  stroke-opacity: 0.85;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: cx-draw 0.35s ease-out forwards;
+}
+.cx-overlay .cx-node {
+  fill: var(--cx-color);
+  stroke: none;
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0);
+  animation: cx-pop 0.25s ease-out forwards;
+}
+@keyframes cx-draw { to { stroke-dashoffset: 0; } }
+@keyframes cx-show { to { opacity: 1; } }
+@keyframes cx-run  { to { stroke-dashoffset: -50; } }
+@keyframes cx-pop  { 0% { transform: scale(0); } 70% { transform: scale(1.6); } 100% { transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .cx-overlay .cx-base, .cx-overlay .cx-branch { animation: none; stroke-dashoffset: 0; }
+  .cx-overlay .cx-pulse { display: none; }
+  .cx-overlay .cx-node { animation: none; transform: scale(1); }
+}
+`;
+
+if (!document.getElementById('cx-circuit-styles')) {
+  const style = document.createElement('style');
+  style.id = 'cx-circuit-styles';
+  style.textContent = CSS;
+  document.head.appendChild(style);
 }
 
 let svg = null;
