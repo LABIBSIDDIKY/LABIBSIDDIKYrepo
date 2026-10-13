@@ -1,3 +1,4 @@
+
 <% layout = false; %>
 <%
 const skills = [
@@ -17,13 +18,163 @@ const skills = [
   { name: "Hardware and software troubleshooting", summary: "Diagnosing and fixing computer problems, from faulty components to software errors." },
   { name: "Remote IT support", summary: "Helping people solve technical issues from a distance using remote tools." }
 ];
-const roles = ["CSE Student", "Software Developer", "Web Developer", "Beginner Cyber Security Consultant"];
+
+const roles = [
+  "CSE Student",
+  "Software Developer",
+  "Web Developer",
+  "Beginner Cyber Security Consultant"
+];
 %>
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#0b0d0b"><title><%= title %></title><link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/css/main.css"><link rel="stylesheet" href="/css/animations.css"></head>
-<body data-page="about"><a class="skip-link" href="#main">Skip to content</a><div class="site-noise"></div><%- include("../partials/navbar", { page, profile }) %><main id="main">
-<section class="page-hero section-shell"><p class="eyebrow reveal">ABOUT / CONTEXT</p><h1 class="page-title reveal">A curious mind.<br><span>A growing toolkit.</span></h1><p class="page-lead reveal"><%= profile.headline %></p></section>
-<section class="section-shell section-space"><div class="section-heading"><div><p class="eyebrow">WHO I AM</p><h2>Saiful Siddiky <span>Labib</span></h2></div></div><div class="tag-list"><% roles.forEach(role => { %><span><%= role %></span><% }) %></div></section>
-<section class="section-shell content-grid section-space"><div><p class="eyebrow">THE SHORT VERSION</p><h2>Learning is a <span>practice.</span></h2></div><div class="prose"><% profile.about.forEach(paragraph => { %><p><%= paragraph %></p><% }) %><p>My focus is on building a solid foundation, documenting what I learn, and turning practice into useful projects.</p></div></section>
-<section class="section-shell section-space"><div class="section-heading"><div><p class="eyebrow">EDUCATION</p><h2>Where I'm <span>learning.</span></h2></div></div><div class="timeline"><% profile.education.forEach(item => { %><article class="timeline-item"><span class="timeline-dot"></span><div><p class="eyebrow"><%= item.period %></p><h3><%= item.qualification %></h3><h4><%= item.institution %></h4><p><%= item.detail %></p></div></article><% }) %></div></section>
-<section class="section-shell section-space"><div class="section-heading"><div><p class="eyebrow">SKILLS</p><h2>What I'm <span>exploring.</span></h2></div></div><div class="interest-grid"><% skills.forEach((skill, i) => { %><div class="interest-card skill-card"><span class="mono"><%= String(i + 1).padStart(2, "0") %></span><h3><%= skill.name %></h3><p class="skill-summary"><%= skill.summary %></p></div><% }) %></div></section>
-</main><%- include("../partials/footer", { profile }) %><script type="module" src="/js/main.js"></script><script type="module" src="/js/scroll.js"></script><script type="module" src="/js/circuit.js"></script><script type="module" src="/js/clock.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0b0d0b">
+
+  <title><%= title %></title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/about-video.css">
+</head>
+
+<body data-page="about">
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- Existing visual texture -->
+  <div class="site-noise"></div>
+
+  <!-- Full-screen background video -->
+  <div class="about-video-background" aria-hidden="true">
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="/videos/about-me.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- Dark overlay above the video -->
+  <div class="about-video-overlay" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <%- include("../partials/navbar", { page, profile }) %>
+
+  <main id="main">
+
+    <!-- INTRODUCTION -->
+    <section class="page-hero section-shell">
+      <p class="eyebrow reveal">ABOUT / CONTEXT</p>
+
+      <h1 class="page-title reveal">
+        A curious mind.<br>
+        <span>A growing toolkit.</span>
+      </h1>
+
+      <p class="page-lead reveal">
+        <%= profile.headline %>
+      </p>
+    </section>
+
+    <!-- WHO I AM -->
+    <section class="section-shell section-space">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">WHO I AM</p>
+          <h2>Saiful Siddiky <span>Labib</span></h2>
+        </div>
+      </div>
+
+      <div class="tag-list">
+        <% roles.forEach(role => { %>
+          <span><%= role %></span>
+        <% }) %>
+      </div>
+    </section>
+
+    <!-- PERSONAL INTRODUCTION -->
+    <section class="section-shell content-grid section-space">
+      <div>
+        <p class="eyebrow">THE SHORT VERSION</p>
+        <h2>Learning is a <span>practice.</span></h2>
+      </div>
+
+      <div class="prose">
+        <% profile.about.forEach(paragraph => { %>
+          <p><%= paragraph %></p>
+        <% }) %>
+
+        <p>
+          My focus is on building a solid foundation,
+          documenting what I learn, and turning practice
+          into useful projects.
+        </p>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section class="section-shell section-space">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">EDUCATION</p>
+          <h2>Where I'm <span>learning.</span></h2>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <% profile.education.forEach(item => { %>
+          <article class="timeline-item">
+            <span class="timeline-dot"></span>
+
+            <div>
+              <p class="eyebrow"><%= item.period %></p>
+              <h3><%= item.qualification %></h3>
+              <h4><%= item.institution %></h4>
+              <p><%= item.detail %></p>
+            </div>
+          </article>
+        <% }) %>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="section-shell section-space">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">SKILLS</p>
+          <h2>What I'm <span>exploring.</span></h2>
+        </div>
+      </div>
+
+      <div class="interest-grid">
+        <% skills.forEach((skill, i) => { %>
+          <div class="interest-card skill-card">
+            <span class="mono">
+              <%= String(i + 1).padStart(2, "0") %>
+            </span>
+
+            <h3><%= skill.name %></h3>
+            <p class="skill-summary"><%= skill.summary %></p>
+          </div>
+        <% }) %>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <%- include("../partials/footer", { profile }) %>
+
+  <!-- Existing scripts -->
+  <script type="module" src="/js/main.js"></script>
+  <script type="module" src="/js/scroll.js"></script>
+  <script type="module" src="/js/circuit.js"></script>
+  <script type="module" src="/js/clock.js"></script>
+
+</body>
+</html>

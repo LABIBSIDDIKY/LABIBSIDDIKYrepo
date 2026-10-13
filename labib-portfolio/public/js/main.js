@@ -1,3 +1,5 @@
+import './circuit-hover.js';
+
 const body = document.body;
 body.classList.add("js-motion");
 

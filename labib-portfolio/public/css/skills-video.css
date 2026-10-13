@@ -1,61 +1,63 @@
+/* =========================================
+   SKILLS PAGE: FULL-PAGE VIDEO BACKGROUND
+   ========================================= */
 
-/* Skills section cinematic video background */
-
-.skills-video-section {
+body[data-page="skills"] {
   position: relative;
   isolation: isolate;
-  overflow: hidden;
-  background: #0b0d0b;
+  background-color: #0b0d0b;
 }
 
-/* Full-section video background */
-.skills-background-video {
-  position: absolute;
+/* Full-screen background video */
+
+body[data-page="skills"] .skills-video-background {
+  position: fixed;
   inset: 0;
   z-index: -2;
-
-  width: 100%;
-  height: 100%;
-  display: block;
-
-  object-fit: cover;
-  object-position: center;
-
-  opacity: 0.42;
+  overflow: hidden;
   pointer-events: none;
+  background-color: #0b0d0b;
 }
 
-/* Keep the background atmospheric rather than distracting */
-.skills-video-overlay {
+body[data-page="skills"] .skills-video-background video {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: translate(-50%, -50%);
+  opacity: 0.38;
+}
+
+/* Dark overlay for readable text */
+
+body[data-page="skills"] .skills-video-overlay {
+  position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(11, 13, 11, 0.82) 0%,
-      rgba(11, 13, 11, 0.38) 30%,
-      rgba(11, 13, 11, 0.55) 70%,
-      rgba(11, 13, 11, 0.96) 100%
-    ),
-    linear-gradient(
-      90deg,
-      rgba(11, 13, 11, 0.72),
-      rgba(11, 13, 11, 0.22),
-      rgba(11, 13, 11, 0.72)
-    );
+  background: linear-gradient(
+    180deg,
+    rgba(11, 13, 11, 0.48) 0%,
+    rgba(11, 13, 11, 0.68) 35%,
+    rgba(11, 13, 11, 0.82) 70%,
+    rgba(11, 13, 11, 0.94) 100%
+  );
 }
 
-/* Content remains above the video */
-.skills-video-content {
+/* Keep page content above the background */
+
+body[data-page="skills"] #main,
+body[data-page="skills"] header,
+body[data-page="skills"] footer {
   position: relative;
-  z-index: 1;
 }
 
-/* Small technical label above the mind map */
-.skills-section-label {
+/* Label row above the mind map */
+
+body[data-page="skills"] .skills-section-label {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -63,65 +65,27 @@
   margin-bottom: 1.5rem;
 }
 
-.skills-section-label .eyebrow {
-  margin-bottom: 0;
-}
+/* Mobile adjustments */
 
-.skills-section-label .mono {
-  color: var(--muted);
-  font-size: 0.65rem;
-}
-
-/* Transparent mind map lets some background motion show through */
-.skills-video-section .mindmap-wrap {
-  background: rgba(10, 15, 10, 0.48);
-  backdrop-filter: blur(3px);
-  -webkit-backdrop-filter: blur(3px);
-  border-color: rgba(199, 243, 107, 0.22);
-}
-
-/* Keep the skill detail panel readable */
-.skills-video-section .skill-detail {
-  background: rgba(12, 16, 12, 0.88);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-color: rgba(199, 243, 107, 0.18);
-}
-
-/* Smaller screens */
-@media (max-width: 800px) {
-  .skills-background-video {
-    opacity: 0.30;
-    object-position: center;
+@media (max-width: 768px) {
+  body[data-page="skills"] .skills-video-background video {
+    opacity: 0.28;
   }
 
-  .skills-video-overlay {
-    background:
-      linear-gradient(
-        180deg,
-        rgba(11, 13, 11, 0.78),
-        rgba(11, 13, 11, 0.58) 45%,
-        rgba(11, 13, 11, 0.96)
-      );
-  }
-
-  .skills-section-label .mono {
-    display: none;
+  body[data-page="skills"] .skills-video-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(11, 13, 11, 0.60) 0%,
+      rgba(11, 13, 11, 0.78) 45%,
+      rgba(11, 13, 11, 0.94) 100%
+    );
   }
 }
 
-/* Reduced motion and battery-friendly fallback */
+/* Respect reduced-motion preferences */
+
 @media (prefers-reduced-motion: reduce) {
-  .skills-background-video {
+  body[data-page="skills"] .skills-video-background video {
     display: none;
-  }
-
-  .skills-video-overlay {
-    background: #0b0d0b;
-  }
-
-  .skills-video-section .mindmap-wrap {
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
   }
 }

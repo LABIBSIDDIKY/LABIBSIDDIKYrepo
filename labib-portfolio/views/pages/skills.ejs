@@ -17,6 +17,24 @@
 
 <body data-page="skills">
   <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- FULL-SCREEN VIDEO BACKGROUND -->
+  <div class="skills-video-background" aria-hidden="true">
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      tabindex="-1"
+    >
+      <source src="/videos/skills-circuit.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- Darkens the video so text stays readable -->
+  <div class="skills-video-overlay" aria-hidden="true"></div>
+
   <div class="site-noise" aria-hidden="true"></div>
 
   <%- include("../partials/navbar", { page, profile }) %>
@@ -35,53 +53,39 @@
       </p>
     </section>
 
-    <section class="skills-video-section">
-      <video
-        class="skills-background-video"
-        autoplay muted loop playsinline
-        preload="metadata"
-        aria-hidden="true"
-        tabindex="-1"
-      >
-        <source src="/videos/skills-circuit.mp4" type="video/mp4">
-      </video>
+    <section class="section-shell section-space">
 
-      <div class="skills-video-overlay" aria-hidden="true"></div>
-
-      <div class="skills-video-content section-shell section-space">
-
-        <div class="skills-section-label">
-          <p class="eyebrow">INTERACTIVE KNOWLEDGE NETWORK</p>
-          <span class="mono">SYSTEM / SKILLS-001</span>
-        </div>
-
-        <div class="mindmap-wrap mindmap-large">
-          <div class="mindmap-lines" aria-hidden="true"></div>
-
-          <div class="mindmap-center">
-            <span class="center-ring"></span>
-            <span>LABIB</span>
-            <small>SKILLS / INTERESTS</small>
-          </div>
-
-          <div class="mindmap-nodes">
-            <% skills.forEach(skill => { %>
-              <%- include("../partials/skill-node", { skill }) %>
-            <% }) %>
-          </div>
-        </div>
-
-        <div
-          class="skill-detail skill-detail-large"
-          data-skill-detail
-          aria-live="polite"
-        >
-          <span class="detail-kicker">SELECT A NODE</span>
-          <h3>Explore the branches.</h3>
-          <p>Choose a node above to see its focus areas and practical notes.</p>
-        </div>
-
+      <div class="skills-section-label">
+        <p class="eyebrow">INTERACTIVE KNOWLEDGE NETWORK</p>
+        <span class="mono">SYSTEM / SKILLS-001</span>
       </div>
+
+      <div class="mindmap-wrap mindmap-large">
+        <div class="mindmap-lines" aria-hidden="true"></div>
+
+        <div class="mindmap-center">
+          <span class="center-ring"></span>
+          <span>LABIB</span>
+          <small>SKILLS / INTERESTS</small>
+        </div>
+
+        <div class="mindmap-nodes">
+          <% skills.forEach(skill => { %>
+            <%- include("../partials/skill-node", { skill }) %>
+          <% }) %>
+        </div>
+      </div>
+
+      <div
+        class="skill-detail skill-detail-large"
+        data-skill-detail
+        aria-live="polite"
+      >
+        <span class="detail-kicker">SELECT A NODE</span>
+        <h3>Explore the branches.</h3>
+        <p>Choose a node above to see its focus areas and practical notes.</p>
+      </div>
+
     </section>
 
     <section class="section-shell section-space">

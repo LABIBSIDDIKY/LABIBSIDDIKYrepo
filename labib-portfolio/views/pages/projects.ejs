@@ -9,10 +9,29 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/animations.css">
+  <link rel="stylesheet" href="/css/projects-video.css">
   <noscript><style>.reveal { opacity: 1 !important; transform: none !important; }</style></noscript>
 </head>
 <body data-page="projects">
   <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- FULL-SCREEN VIDEO BACKGROUND -->
+  <div class="projects-video-background" aria-hidden="true">
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      tabindex="-1"
+    >
+      <source src="/videos/projects-video.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- Darkens the video so text stays readable -->
+  <div class="projects-video-overlay" aria-hidden="true"></div>
+
   <div class="site-noise"></div>
 
   <%- include("../partials/navbar", { page: typeof page !== 'undefined' ? page : 'projects', profile: typeof profile !== 'undefined' ? profile : {} }) %>

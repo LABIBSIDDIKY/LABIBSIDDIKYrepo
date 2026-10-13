@@ -1,4 +1,3 @@
-
 <% layout = false; %>
 <!doctype html>
 <html lang="en">
@@ -21,30 +20,32 @@
 
 <body data-page="home">
   <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- FULL-SCREEN VIDEO BACKGROUND -->
+  <div class="home-video-background" aria-hidden="true">
+    <video
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      tabindex="-1"
+    >
+      <source src="/videos/hero-circuit.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- Darkens the video so text stays readable -->
+  <div class="home-video-overlay" aria-hidden="true"></div>
+
   <div class="site-noise" aria-hidden="true"></div>
 
   <%- include("../partials/navbar", { page, profile }) %>
 
   <main id="main">
 
-    <!-- HERO SECTION WITH VIDEO BACKGROUND -->
+    <!-- HERO SECTION -->
     <section class="hero section-shell">
-
-      <video
-        class="hero-video"
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-        aria-hidden="true"
-        tabindex="-1"
-      >
-        <source src="/videos/hero-circuit.mp4" type="video/mp4">
-      </video>
-
-      <!-- Darkens the video so text stays readable -->
-      <div class="hero-video-overlay" aria-hidden="true"></div>
 
       <!-- Existing animated circuit artwork -->
       <svg
@@ -73,12 +74,12 @@
       </div>
 
       <div class="hero-content">
-           
-<img
-  class="profile-picture reveal"
-  src="/images/profile.jpg"
-  alt="Portrait of Labib"
-/>
+
+        <img
+          class="profile-picture reveal"
+          src="/images/profile.jpg"
+          alt="Portrait of Labib"
+        />
 
         <p class="eyebrow reveal">
           HELLO, I'M <%= profile.shortName.toUpperCase() %>
@@ -215,10 +216,12 @@
 
   <%- include("../partials/footer", { profile }) %>
 
+  <script type="application/json" id="skills-data"><%- JSON.stringify(skills).replace(/</g, "\\u003c") %></script>
+
   <script type="module" src="/js/main.js"></script>
   <script type="module" src="/js/scroll.js"></script>
   <script type="module" src="/js/circuit.js"></script>
   <script type="module" src="/js/clock.js"></script>
-  <script type="module" src="/js/mindmap.js"></script>
+  <script type="module" src="/js/mindmap.js?v=4"></script>
 </body>
 </html>

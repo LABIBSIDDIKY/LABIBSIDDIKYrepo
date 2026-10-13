@@ -1,0 +1,83 @@
+
+/* =========================================
+   CONTACT PAGE — CINEMATIC VIDEO BACKGROUND
+   ========================================= */
+
+body[data-page="contact"] {
+  position: relative;
+  isolation: isolate;
+  background-color: #0b0d0b;
+}
+
+/* Full-screen background video */
+
+body[data-page="contact"] .contact-video-background {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+  pointer-events: none;
+  background-color: #0b0d0b;
+}
+
+body[data-page="contact"] .contact-video-background video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: translate(-50%, -50%);
+  opacity: 0.38;
+}
+
+/* Dark overlay for readable text and forms */
+
+body[data-page="contact"] .contact-video-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+
+  background: linear-gradient(
+    180deg,
+    rgba(11, 13, 11, 0.48) 0%,
+    rgba(11, 13, 11, 0.68) 35%,
+    rgba(11, 13, 11, 0.82) 70%,
+    rgba(11, 13, 11, 0.94) 100%
+  );
+}
+
+/* Keep the page content above the background */
+
+body[data-page="contact"] #main,
+body[data-page="contact"] header,
+body[data-page="contact"] footer {
+  position: relative;
+}
+
+/* Mobile adjustments */
+
+@media (max-width: 768px) {
+  body[data-page="contact"] .contact-video-background video {
+    opacity: 0.28;
+  }
+
+  body[data-page="contact"] .contact-video-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(11, 13, 11, 0.60) 0%,
+      rgba(11, 13, 11, 0.78) 45%,
+      rgba(11, 13, 11, 0.94) 100%
+    );
+  }
+}
+
+/* Respect reduced-motion preferences */
+
+@media (prefers-reduced-motion: reduce) {
+  body[data-page="contact"] .contact-video-background video {
+    display: none;
+  }
+}
