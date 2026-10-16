@@ -1,6 +1,16 @@
-const clockElements = document.querySelectorAll("[data-clock]");
 const yearElement = document.querySelector("[data-year]");
 if (yearElement) yearElement.textContent = new Date().getFullYear();
+
+// Floating clock, added to every page that loads this script (bottom-left corner)
+if (!document.querySelector(".floating-clock")) {
+  const box = document.createElement("div");
+  box.className = "floating-clock mono circuit-ignore";
+  box.setAttribute("aria-label", "Current date and time in Bangladesh");
+  box.innerHTML = '<span class="status-dot"></span><span data-clock>--</span>';
+  document.body.appendChild(box);
+}
+
+const clockElements = document.querySelectorAll("[data-clock]");
 
 const formatter = new Intl.DateTimeFormat("en-US", {
   timeZone: "Asia/Dhaka",

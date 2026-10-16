@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="/css/animations.css">
   <link rel="stylesheet" href="/css/mindmap.css">
   <link rel="stylesheet" href="/css/hero-video.css">
+  <link rel="stylesheet" href="/css/circuit-hover.css">
 </head>
 
 <body data-page="home">
@@ -67,9 +68,6 @@
         <span class="eyebrow">
           <span class="status-dot"></span>
           PERSONAL SYSTEM / 001
-        </span>
-        <span class="mono">
-          BANGLADESH · <span data-clock>--:--:--</span>
         </span>
       </div>
 
@@ -170,8 +168,10 @@
       </div>
 
       <div class="project-grid">
-        <% projects.forEach((project) => { %>
-          <article class="project-card reveal">
+        <% projects.forEach((project) => {
+             const isExternal = project.href && /^https?:/i.test(project.href);
+        %>
+          <article class="project-card reveal" data-circuit="card">
             <div class="project-art">
               <span class="project-number"><%= project.number %></span>
               <div class="art-grid"></div>
@@ -184,7 +184,10 @@
                 <p class="eyebrow"><%= project.status %></p>
                 <h3><%= project.name %></h3>
               </div>
-              <span class="project-arrow">↗</span>
+              <a class="project-arrow"
+                 href="<%= project.href || '#' %>"
+                 <% if (isExternal) { %>target="_blank" rel="noopener noreferrer"<% } %>
+                 aria-label="Open <%= project.name || 'project' %>">↗</a>
             </div>
 
             <p class="project-description"><%= project.description %></p>
@@ -223,5 +226,6 @@
   <script type="module" src="/js/circuit.js"></script>
   <script type="module" src="/js/clock.js"></script>
   <script type="module" src="/js/mindmap.js?v=4"></script>
+  <script type="module" src="/js/circuit-hover.js"></script>
 </body>
 </html>

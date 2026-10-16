@@ -284,3 +284,24 @@ button { color: inherit; }
   padding-left: clamp(0.5rem, 3vw, 2.5rem);   /* set to 0 to line it up under "Curious" */
   color: var(--accent);
 }
+/* Floating clock (all pages) */
+.floating-clock {
+  position: fixed;
+  left: 1rem;
+  bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .55rem .85rem;
+  background: rgba(11, 13, 11, .78);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(6px);
+  color: var(--text);
+  font-size: .62rem;
+  pointer-events: none;
+}
+
+@media (max-width: 560px) {
+  .floating-clock { left: .6rem; bottom: .6rem; font-size: .55rem; padding: .45rem .65rem; }
+}
