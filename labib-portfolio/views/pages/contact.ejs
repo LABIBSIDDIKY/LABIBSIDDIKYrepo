@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="/css/main.css">
   <link rel="stylesheet" href="/css/animations.css">
   <link rel="stylesheet" href="/css/contact-video.css">
+  <link rel="stylesheet" href="/css/circuit-hover.css">
 </head>
 
 <body data-page="contact">
@@ -55,10 +56,17 @@
       <div>
         <p class="eyebrow">SEND A NOTE</p>
         <h2>Start a <span>conversation.</span></h2>
-        <p class="muted">The form needs an email delivery provider before it can send messages.</p>
+        <p class="muted">Send me a message and I'll reply by email.</p>
       </div>
 
-      <form class="contact-form" data-contact-form>
+      <form class="contact-form" data-contact-form action="https://api.web3forms.com/submit" method="POST">
+        <!-- Web3Forms: replace with your access key (it is safe to expose in HTML) -->
+        <input type="hidden" name="access_key" value="7b8e4cbd-21f8-4ed5-aeeb-7144f0343921">
+        <input type="hidden" name="subject" value="New message from your portfolio">
+        <input type="hidden" name="from_name" value="Portfolio contact form">
+        <!-- Spam honeypot: real visitors never see or tick this -->
+        <input type="checkbox" name="botcheck" class="circuit-ignore" tabindex="-1" autocomplete="off" style="display:none">
+
         <label for="name">Name</label>
         <input id="name" name="name" required autocomplete="name" placeholder="Your name">
 
@@ -94,5 +102,7 @@
   <script type="module" src="/js/scroll.js"></script>
   <script type="module" src="/js/circuit.js"></script>
   <script type="module" src="/js/clock.js"></script>
+  <script type="module" src="/js/circuit-hover.js"></script>
+  <script type="module" src="/js/contact-form.js"></script>
 </body>
 </html>
