@@ -9,3 +9,19 @@
   display: block;
   margin-bottom: 1.5rem;
 }
+/* Page headings (About, Skills, Projects, Contact) */
+.page-title {
+  word-spacing: 0.25em;     /* space between words */
+  letter-spacing: 0.02em;   /* space between letters */
+  line-height: 1.2;         /* space between the two lines */
+}
+
+.page-title span {
+  display: inline-block;
+  margin-top: 0.15em;       /* a little gap before the second line */
+}
+
+/* Space between the header bar and the heading */
+.page-hero {
+  padding-top: clamp(6rem, 12vh, 9rem);
+}
