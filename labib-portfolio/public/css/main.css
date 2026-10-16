@@ -25,26 +25,23 @@
 .page-hero {
   padding-top: clamp(6rem, 12vh, 9rem);
 }
-/* Home hero heading: spacing */
+/* Home hero heading */
 .hero-title {
-  line-height: 1.15;          /* space between the two lines */
-  letter-spacing: 0.02em;     /* space between letters */
-  word-spacing: 0.25em;       /* space between words */
+  line-height: 0.95;          /* smaller = lines closer together */
+  letter-spacing: 0;
+  word-spacing: 0;            /* normal space between words */
 }
 
 .hero-title .title-line {
   display: block;
+  white-space: nowrap;        /* keeps "Curious by" on one line */
 }
 
 .hero-title .title-indent {
-  margin-top: 0.1em;
-  padding-left: clamp(1rem, 6vw, 5rem);   /* how far the second line is pushed in */
+  margin-top: 0;              /* no extra gap between the two lines */
+  padding-left: clamp(0.5rem, 3vw, 2.5rem);   /* set to 0 to line it up with "Curious by" */
 }
 
-/* Same color profile as "A curious mind. / A growing toolkit." */
-.hero-title .title-line:first-child {
-  color: inherit;             /* same as the first line of .page-title */
-}
 .hero-title .accent-line {
-  color: var(--accent, #00f0ff);   /* replace with the color used by .page-title span */
+  color: var(--accent, #00f0ff);   /* use the same color value as .page-title span */
 }
